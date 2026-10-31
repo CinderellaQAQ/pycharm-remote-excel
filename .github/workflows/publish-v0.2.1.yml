@@ -14,9 +14,14 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Verify plugin package
-        run: echo "9e9eb692e5b84fe6931ab281c263b8ffbd66f01c95e868920cc53e8463a4ca69  .release/pycharm-remote-excel-0.2.1.zip" | sha256sum --check -
+        run: |
+          echo "9e9eb692e5b84fe6931ab281c263b8ffbd66f01c95e868920cc53e8463a4ca69  .release/pycharm-remote-excel-0.2.1.zip" | sha256sum --check -
 
       - name: Create GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create v0.2.1 .release/pycharm-remote-excel-0.2.1.zip --target 1f51950156854ae2d5da02c00dbcbe3ee12c2b6b --title "v0.2.1" --notes "Open remote Excel workbooks in local Office applications. Local edits never upload to or modify the remote file. Maximum file size: 2 GB. SHA-256: 9e9eb692e5b84fe6931ab281c263b8ffbd66f01c95e868920cc53e8463a4ca69"
+        run: |
+          gh release create v0.2.1 .release/pycharm-remote-excel-0.2.1.zip \
+            --target 1f51950156854ae2d5da02c00dbcbe3ee12c2b6b \
+            --title "v0.2.1" \
+            --notes "Open remote Excel workbooks in local Office applications. Local edits never upload to or modify the remote file. Maximum file size is 2 GB. SHA-256 is 9e9eb692e5b84fe6931ab281c263b8ffbd66f01c95e868920cc53e8463a4ca69."

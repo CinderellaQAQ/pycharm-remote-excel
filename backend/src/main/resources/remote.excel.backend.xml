@@ -1,0 +1,12 @@
+<idea-plugin>
+    <dependencies>
+        <module name="intellij.platform.backend"/>
+        <module name="intellij.platform.kernel.backend"/>
+        <module name="remote.excel.shared"/>
+    </dependencies>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <platform.rpc.backend.remoteApiProvider implementation="io.github.remoteexcel.backend.BackendRpcApiProvider"/>
+    </extensions>
+</idea-plugin>
+

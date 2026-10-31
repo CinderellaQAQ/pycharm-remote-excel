@@ -1,0 +1,15 @@
+<idea-plugin>
+    <id>io.github.remoteexcel</id>
+    <name>Remote Excel Bridge</name>
+    <vendor>Remote Excel Bridge</vendor>
+    <description><![CDATA[
+        Downloads Excel workbooks from a PyCharm Remote Development project and opens an
+        independent local copy in the spreadsheet application associated with the file type.
+    ]]></description>
+
+    <content>
+        <module name="remote.excel.shared" loading="required"/>
+        <module name="remote.excel.frontend" required-if-available="intellij.platform.frontend"/>
+        <module name="remote.excel.backend" required-if-available="intellij.platform.backend"/>
+    </content>
+</idea-plugin>

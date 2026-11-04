@@ -5,3 +5,5 @@
 build/
 out/
 */build/
+compat251/.gradle/
+compat251/.intellijPlatform/

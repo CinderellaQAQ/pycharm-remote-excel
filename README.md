@@ -37,6 +37,16 @@
 
 插件 ZIP 位于 `build/distributions/`。在 PyCharm 的 **Settings | Plugins** 中选择齿轮菜单，再选择 **Install Plugin from Disk...** 安装 ZIP。JetBrains 当前只会为 Marketplace 插件自动同步前后端；用本地 ZIP 测试时，需要在 Remote Development 的 Client 和 Host 两侧都安装同一个 ZIP。
 
+### PyCharm 2025.1.2 兼容包
+
+`compat251/` 包含面向 `PY-251.26094.141` 的独立前端兼容实现。它不使用 2025.3 才提供的 RPC API，而是在本地 JetBrains Client 中通过远程 VFS 流式创建快照，因此不会把整个工作簿一次性载入内存。
+
+```bash
+./gradlew -p compat251 buildPlugin
+```
+
+兼容包位于 `compat251/build/distributions/`，版本范围限定为 `251.26094.141` 到 `251.*`。
+
 开发调试：
 
 ```bash

@@ -1,0 +1,15 @@
+<idea-plugin>
+    <id>io.github.remoteexcel</id>
+    <name>Remote Excel Bridge</name>
+    <vendor>Remote Excel Bridge</vendor>
+    <description><![CDATA[
+        Downloads a workbook visible in PyCharm Remote Development to the local JetBrains Client
+        and opens an independent snapshot in the operating system's associated Office application.
+        Local changes are never uploaded to the remote server.
+    ]]></description>
+
+    <content>
+        <module name="remote.excel.compat251.frontend"
+                required-if-available="intellij.platform.frontend"/>
+    </content>
+</idea-plugin>

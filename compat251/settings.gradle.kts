@@ -14,7 +14,7 @@ plugins {
     id("org.jetbrains.intellij.platform.settings") version "2.18.1"
 }
 
-rootProject.name = "pycharm-remote-excel-251"
+rootProject.name = "remote.excel.compat251"
 
 dependencyResolutionManagement {
     repositories {
@@ -24,3 +24,5 @@ dependencyResolutionManagement {
         }
     }
 }
+
+include("frontend")

@@ -8,8 +8,19 @@
         Local changes are never uploaded to the remote server.
     ]]></description>
 
-    <content>
-        <module name="remote.excel.compat251.frontend"
-                required-if-available="intellij.platform.frontend"/>
-    </content>
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <notificationGroup id="Remote Excel Bridge" displayType="BALLOON"/>
+    </extensions>
+
+    <actions>
+        <action id="RemoteExcel.OpenInOffice"
+                class="io.github.remoteexcel.compat251.OpenInOfficeAction"
+                text="在本地 Office 中打开（不回传）"
+                description="Download this workbook and open an independent local copy">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+            <add-to-group group-id="EditorTabPopupMenu" anchor="last"/>
+        </action>
+    </actions>
 </idea-plugin>

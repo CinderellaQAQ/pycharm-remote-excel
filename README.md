@@ -39,13 +39,13 @@
 
 ### PyCharm 2025.1.2 兼容包
 
-`compat251/` 包含面向 `PY-251.26094.141` 的独立前端兼容实现。它不使用 2025.3 才提供的 RPC API，而是在本地 JetBrains Client 中通过远程 VFS 流式创建快照，因此不会把整个工作簿一次性载入内存。
+`compat251/` 包含面向 `PY-251.26094.141` 的经典单 JAR 兼容实现。它不使用 2025.3 才提供的 RPC API，也不使用 251 安装器无法解析的独立模块 JAR；插件在本地 JetBrains Client 中通过远程 VFS 流式创建快照，因此不会把整个工作簿一次性载入内存。
 
 ```bash
 ./gradlew -p compat251 buildPlugin
 ```
 
-兼容包位于 `compat251/build/distributions/`，版本范围限定为 `251.26094.141` 到 `251.*`。
+兼容包位于 `compat251/build/distributions/`，版本范围限定为 `251.26094.141` 到 `251.*`。请把这个兼容包安装在本机 JetBrains Client；若远程 Host 也显示独立的插件管理页面，不需要在 Host 端安装此兼容包。
 
 开发调试：
 

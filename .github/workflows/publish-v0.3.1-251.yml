@@ -1,0 +1,40 @@
+name: Publish v0.3.1-251
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/publish-v0.3.1-251.yml'
+
+permissions:
+  contents: write
+  statuses: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out release payload
+        uses: actions/checkout@v4
+
+      - name: Verify plugin package
+        run: |
+          echo "eff4e585030da61b881789e51f233fbab9f54f1334d5a615910ad9ce660ab764  .release/pycharm-remote-excel-0.3.1-251.zip" | sha256sum --check -
+
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view v0.3.1-251 >/dev/null 2>&1; then
+            gh release upload v0.3.1-251 .release/pycharm-remote-excel-0.3.1-251.zip --clobber
+          else
+            gh release create v0.3.1-251 .release/pycharm-remote-excel-0.3.1-251.zip --target 81ffff1e5399e7bd9618d5c41b1c4cff1528ba31 --title "v0.3.1-251" --notes "Fixed compatibility build for PyCharm 2025.1.2 (Build PY-251.26094.141). This release uses a classic single-JAR plugin descriptor that is verified to load in the exact IDE build. Local edits are never uploaded. Maximum file size is 2 GB. SHA-256: eff4e585030da61b881789e51f233fbab9f54f1334d5a615910ad9ce660ab764."
+          fi
+
+      - name: Mark release upload successful
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api --method POST "repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" -f state=success -f context=release/v0.3.1-251 -f description="Release asset uploaded and checksum verified"

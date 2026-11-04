@@ -3,13 +3,26 @@
     <name>Remote Excel Bridge</name>
     <vendor>Remote Excel Bridge</vendor>
     <description><![CDATA[
-        Downloads a workbook visible in PyCharm Remote Development to the local JetBrains Client
-        and opens an independent snapshot in the operating system's associated Office application.
+        Downloads a workbook selected in PyCharm's SSH/SFTP Remote Host tool window
+        and opens an independent local snapshot in the operating system's associated Office application.
         Local changes are never uploaded to the remote server.
     ]]></description>
 
-    <content>
-        <module name="remote.excel.compat251.frontend"
-                required-if-available="intellij.platform.frontend"/>
-    </content>
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.jetbrains.plugins.webDeployment</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <notificationGroup id="Remote Excel Bridge" displayType="BALLOON"/>
+    </extensions>
+
+    <actions>
+        <action id="RemoteExcel.OpenRemoteHostInOffice"
+                class="io.github.remoteexcel.compat251.RemoteHostOpenInOfficeAction"
+                text="在本地 Office 中打开（不回传）"
+                description="Download this remote workbook and open an independent local copy">
+            <add-to-group group-id="RemoteHostViewPopupMenu"
+                          anchor="after"
+                          relative-to-action="RemoteHostView.EditRemoteFile"/>
+        </action>
+    </actions>
 </idea-plugin>

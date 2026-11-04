@@ -1,0 +1,27 @@
+name: Publish v0.3.0-251
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out release payload
+        uses: actions/checkout@v4
+
+      - name: Verify plugin package
+        run: |
+          echo "da46769db9e76b550e0cce7f3cc7642fa70bc2ddef20bb2fd6035c7b16ae0c67  .release/pycharm-remote-excel-0.3.0-251.zip" | sha256sum --check -
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create v0.3.0-251 .release/pycharm-remote-excel-0.3.0-251.zip \
+            --target 905d64b2861d8bbbea6dd7ac3358d36cae053a27 \
+            --title "v0.3.0-251" \
+            --notes "Compatibility build for PyCharm 2025.1.2 (Build PY-251.26094.141). Opens remote VFS workbooks as independent local snapshots. Local edits are never uploaded. Maximum file size is 2 GB. SHA-256 is da46769db9e76b550e0cce7f3cc7642fa70bc2ddef20bb2fd6035c7b16ae0c67."
